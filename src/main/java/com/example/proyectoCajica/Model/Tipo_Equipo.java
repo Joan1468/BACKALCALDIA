@@ -11,9 +11,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class tipo_equipo {
+public class Tipo_Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    //ATRIBUTOS
+
     private int id_tipo_equipo;
     private String portatil;
     private String computadorEscritorio;
@@ -36,8 +39,11 @@ public class tipo_equipo {
     private String celular;
 
 
-    @OneToMany(mappedBy = "tipoEquipo", cascade = CascadeType.ALL)
-    private List<Equipo> Equipo;
+//RELACIONES
+
+    //UN TIPO DE EQUIPO CON MUCHOS EQUIPOS
+    @OneToMany(mappedBy = "tipo_Equipo", cascade = CascadeType.ALL)// LO QUE VA A BUSCAR
+    private List<Equipo> equipo;//DONDE LO VA A BUSCAR
 
 
 }

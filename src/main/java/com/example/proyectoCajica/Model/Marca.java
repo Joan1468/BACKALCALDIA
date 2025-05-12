@@ -14,16 +14,19 @@ package com.example.proyectoCajica.Model;
 public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;              // Ej: "HP", "Dell", "Lenovo"
-    private String paisOrigen;          // Ej: "Estados Unidos", "China"
-    private String descripcion;         // Descripción general de la marca
-    private String sitioWeb;            // URL del sitio web oficial
-    private String contactoSoporte;
 
-    @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
-    private List<Equipo> Equipo;
+    //ATRIBUTOS
 
+    private Long id_marca;
+    private String nombre_Equipo;  // "HP", "Dell", "Lenovo"
+    private String paisOrigen;     // "Estados Unidos", "China"
+    private String descripcion;    // Descripción general de la marca
+    private String sitioWeb;       // URL del sitio web oficial(opcional)
 
+//RELACIONES
+
+    //UNA MARCA PARA MUCHOS EQUIPOS
+    @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL, orphanRemoval = true)// LO QUE VA A BUSCAR
+    private List<Equipo> equipo;//DONDE LO VA A BUSCAR
 
 }

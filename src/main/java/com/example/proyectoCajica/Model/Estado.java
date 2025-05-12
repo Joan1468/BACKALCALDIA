@@ -19,8 +19,10 @@ private String Bueno;
 private String Regular;
 private String Malo;
 
-    @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL)
-    private List<Equipo> equipos;
+//RELACIONES
 
+//ESTADO CON EQUIPO  UN SOLO ESTAD PARA MUCHOS EQUIPOS
+@OneToMany(mappedBy = "Estado", cascade = CascadeType.ALL, orphanRemoval = true)// LO QUE VA A BUSCAR
+private List<Equipo> equipo;//DONDE LO VA A BUSCAR
 
 }

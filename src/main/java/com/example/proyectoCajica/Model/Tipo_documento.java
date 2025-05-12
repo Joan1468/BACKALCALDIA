@@ -11,19 +11,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class tipo_vinculacion {
+public class Tipo_documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     //ATRIBUTOS
 
-    private Long id_tipo_vinculacion;
-    private String funcionario;
-    private String Contratista;
+    private Long id_tipo_documento;//ID DE TIPO DE DOCUMENTO
+    private String nombre;// cedula
 
-//RELACIONES
 
-    //UN TIPO DE VINCULACION PARA MUCHOS USUARIOS
-    @OneToMany(mappedBy = "tipo_vinculacion", cascade = CascadeType.ALL)// LO QUE VA A BUSCAR
+    //RELACIONES
+
+    //TIPO DE DOCUMENTO CON USUARIO
+    // UN TIPO DE DOCUMENTO PARA MUCHOS USUARIOS
+    @OneToMany(mappedBy = "tipo_documento", cascade = CascadeType.ALL)// LO QUE VA A BUSCAR
     private List<Usuario> usuario;//DONDE LO VA A BUSCAR
+
 }

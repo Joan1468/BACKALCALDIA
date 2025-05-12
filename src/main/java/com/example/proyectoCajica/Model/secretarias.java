@@ -14,6 +14,9 @@ import java.util.List;
 public class secretarias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    //ATRIBUTOS
+
     private int id_secretaria;
     private String secretariaGobierno;
     private String secretariaHacienda;
@@ -30,9 +33,5 @@ public class secretarias {
     private String secretariaMujer;
     private String secretariaTIC;
     private String secretariaJuridica;
-
-    @OneToMany(mappedBy = "secretaria", cascade = CascadeType.ALL)
-    private List<Usuario> Usuario;
-
 }
-//
+//SIN RELACION
