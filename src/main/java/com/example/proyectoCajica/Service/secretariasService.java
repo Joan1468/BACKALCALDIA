@@ -1,7 +1,7 @@
 package com.example.proyectoCajica.Service;
 
-import com.example.proyectoCajica.Repository.secretariasRepository;
 import com.example.proyectoCajica.Model.secretarias;
+import com.example.proyectoCajica.Repository.secretariasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +12,30 @@ import java.util.Optional;
 public class secretariasService {
 
     @Autowired
-    private secretariasRepository secretariasRepository;
+    private secretariasRepository repository;
 
-    // Guardar una secretaria
+    // Crear o actualizar una secretaria
     public secretarias guardar(secretarias secretaria) {
-        return secretariasRepository.save(secretaria);
+        return repository.save(secretaria);
     }
 
-    // Listar todas las secretarias
+    // Obtener todas las secretarías
     public List<secretarias> listar() {
-        return secretariasRepository.findAll();
+        return repository.findAll();
     }
 
-    // Eliminar una secretaria por su id
-    public void eliminar(long id) {
-        secretariasRepository.deleteById(id);
+    // Eliminar por ID (modificado a Long)
+    public void eliminar(Long id) {
+        repository.deleteById(id);
     }
 
-    // Buscar secretaria por su id
-    public Optional<secretarias> buscarPorId(long id) {
-        return secretariasRepository.findById(id);
+    // Buscar por ID (modificado a Long)
+    public Optional<secretarias> buscarPorId(Long id) {
+        return repository.findById(id);
     }
 
-    // Guardar todas las secretarias
-    public List<secretarias> guardarTodos(List<secretarias> secretariasList) {
-        return secretariasRepository.saveAll(secretariasList);
+    // Guardar una lista completa
+    public List<secretarias> guardarTodos(List<secretarias> lista) {
+        return repository.saveAll(lista);
     }
 }

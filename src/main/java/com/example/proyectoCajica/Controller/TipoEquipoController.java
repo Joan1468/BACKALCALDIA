@@ -1,7 +1,11 @@
 package com.example.proyectoCajica.Controller;
 
-import com.example.proyectoCajica.Model.tipo_equipo;
-import com.example.proyectoCajica.Service.tipo_equipoService;
+import com.example.proyectoCajica.Model.TipoEquipo;
+import com.example.proyectoCajica.Service.TipoEquipoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,39 +13,48 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tipo_equipo")
-public class tipo_equipoController {
+@RequestMapping("/tipoequipo")
+@Tag(name = "Tipos de Equipo", description = "Controlador para la gestión de tipos de equipo")
+public class TipoEquipoController {
 
     @Autowired
-    private tipo_equipoService tipoEquipoService;
+    private TipoEquipoService tipoEquipoService;
 
-    // Guardar un tipo de equipo
     @PostMapping
-    public tipo_equipo guardar(@RequestBody tipo_equipo tipoEquipo) {
+    @Operation(summary = "Guardar un tipo de equipo", description = "Permite crear un nuevo tipo de equipo.")
+    public TipoEquipo guardar(
+            @Parameter(description = "Objeto TipoEquipo que contiene los datos a guardar", required = true)
+            @RequestBody TipoEquipo tipoEquipo) {
         return tipoEquipoService.guardar(tipoEquipo);
     }
 
-    // Listar todos los tipos de equipo
     @GetMapping
-    public List<tipo_equipo> listar() {
+    @Operation(summary = "Listar tipos de equipo", description = "Devuelve una lista con todos los tipos de equipo registrados.")
+    public List<TipoEquipo> listar() {
         return tipoEquipoService.listar();
     }
 
-    // Buscar tipo de equipo por id
     @GetMapping("/{id}")
-    public Optional<tipo_equipo> buscarPorId(@PathVariable long id) {
+    @Operation(summary = "Buscar tipo de equipo por ID", description = "Obtiene un tipo de equipo específico mediante su ID.")
+    public Optional<TipoEquipo> buscarPorId(
+            @Parameter(description = "ID del tipo de equipo a buscar", required = true)
+            @PathVariable Long id) {
         return tipoEquipoService.buscarPorId(id);
     }
 
-    // Eliminar un tipo de equipo por id
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
+    @Operation(summary = "Eliminar un tipo de equipo", description = "Elimina un tipo de equipo existente mediante su ID.")
+    public void eliminar(
+            @Parameter(description = "ID del tipo de equipo a eliminar", required = true)
+            @PathVariable Long id) {
         tipoEquipoService.eliminar(id);
     }
 
-    // Guardar varios tipos de equipo
     @PostMapping("/lista")
-    public List<tipo_equipo> guardarVarios(@RequestBody List<tipo_equipo> tiposEquipoList) {
-        return tipoEquipoService.guardarTodos(tiposEquipoList);
+    @Operation(summary = "Guardar varios tipos de equipo", description = "Permite guardar una lista de tipos de equipo en una sola petición.")
+    public List<TipoEquipo> guardarVarios(
+            @Parameter(description = "Lista de tipos de equipo a guardar", required = true)
+            @RequestBody List<TipoEquipo> tipoEquipos) {
+        return tipoEquipoService.guardarTodos(tipoEquipos);
     }
 }

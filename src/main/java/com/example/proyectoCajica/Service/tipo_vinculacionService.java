@@ -15,8 +15,8 @@ public class tipo_vinculacionService {
     private tipo_vinculacionRepository tipoVinculacionRepository;
 
     // Guardar un tipo de vinculación
-    public tipo_vinculacion guardar(tipo_vinculacion tipoVinculacion) {
-        return tipoVinculacionRepository.save(tipoVinculacion);
+    public tipo_vinculacion guardar(tipo_vinculacion tipo_vinculacion) {
+        return tipoVinculacionRepository.save(tipo_vinculacion);
     }
 
     // Listar todos los tipos de vinculación

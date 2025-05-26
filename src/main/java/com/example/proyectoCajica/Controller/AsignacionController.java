@@ -1,7 +1,10 @@
 package com.example.proyectoCajica.Controller;
 
-import com.example.proyectoCajica.Model.asignacion;
-import com.example.proyectoCajica.Service.asignacionService;
+import com.example.proyectoCajica.Model.Asignacion;
+import com.example.proyectoCajica.Service.AsignacionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,39 +12,48 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/asignacion")
-public class asignacionController {
+@RequestMapping("/asignaciones")
+@Tag(name = "Asignaciones", description = "Controlador de Asignaciones")
+public class AsignacionController {
 
     @Autowired
-    private asignacionService asignacionService;
+    private AsignacionService asignacionService;
 
-    // Guardar una asignación
     @PostMapping
-    public asignacion guardar(@RequestBody asignacion asignacion) {
+    @Operation(summary = "Guardar una asignación", description = "Permite guardar una asignación individual.")
+    public Asignacion guardar(
+            @Parameter(description = "Datos de la asignación a guardar", required = true)
+            @RequestBody Asignacion asignacion) {
         return asignacionService.guardar(asignacion);
     }
 
-    // Listar todas las asignaciones
     @GetMapping
-    public List<asignacion> listar() {
+    @Operation(summary = "Listar asignaciones", description = "Devuelve una lista con todas las asignaciones registradas.")
+    public List<Asignacion> listar() {
         return asignacionService.listar();
     }
 
-    // Buscar asignación por id
     @GetMapping("/{id}")
-    public Optional<asignacion> buscarPorId(@PathVariable long id) {
+    @Operation(summary = "Buscar asignación por ID", description = "Permite buscar una asignación por su identificador.")
+    public Optional<Asignacion> buscarPorId(
+            @Parameter(description = "ID de la asignación", required = true)
+            @PathVariable int id) {
         return asignacionService.buscarPorId(id);
     }
 
-    // Eliminar una asignación por id
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
+    @Operation(summary = "Eliminar asignación", description = "Permite eliminar una asignación por su ID.")
+    public void eliminar(
+            @Parameter(description = "ID de la asignación a eliminar", required = true)
+            @PathVariable int id) {
         asignacionService.eliminar(id);
     }
 
-    // Guardar varias asignaciones
-    @PostMapping("/lista")
-    public List<asignacion> guardarVarios(@RequestBody List<asignacion> asignaciones) {
+    @PostMapping("/varias")
+    @Operation(summary = "Guardar varias asignaciones", description = "Permite guardar una lista de asignaciones.")
+    public List<Asignacion> guardarVarias(
+            @Parameter(description = "Lista de asignaciones a guardar", required = true)
+            @RequestBody List<Asignacion> asignaciones) {
         return asignacionService.guardarTodos(asignaciones);
     }
 }

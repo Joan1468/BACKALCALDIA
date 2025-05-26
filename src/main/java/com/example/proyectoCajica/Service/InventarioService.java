@@ -1,7 +1,7 @@
 package com.example.proyectoCajica.Service;
 
-import com.example.proyectoCajica.Model.Inventarios;
-import com.example.proyectoCajica.Repository.InventariosRepository;
+import com.example.proyectoCajica.Model.Inventario;
+import com.example.proyectoCajica.Repository.InventarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class InventariosService {
+public class InventarioService {
 
     @Autowired
-    public InventariosRepository inventariosRepository;
+    private InventarioRepository inventarioRepository;
 
-    public Inventarios guardar(Inventarios inventario) {
-        return inventariosRepository.save(inventario);
+    public Inventario guardar(Inventario inventario) {
+        return inventarioRepository.save(inventario);
     }
 
-    public List<Inventarios> listar() {
-        return inventariosRepository.findAll();
+    public List<Inventario> listar() {
+        return inventarioRepository.findAll();
     }
 
-    public void eliminar(long id) {
-        inventariosRepository.deleteById(id);
+    public Optional<Inventario> buscarPorId(Long id) {
+        return inventarioRepository.findById(id);
     }
 
-    public Optional<Inventarios> buscarPorId(long id) {
-        return inventariosRepository.findById(id);
+    public void eliminar(Long id) {
+        inventarioRepository.deleteById(id);
     }
 
-    public List<Inventarios> guardarTodos(List<Inventarios> inventarios) {
-        return inventariosRepository.saveAll(inventarios);
+    public List<Inventario> guardarTodos(List<Inventario> inventarios) {
+        return inventarioRepository.saveAll(inventarios);
     }
 }

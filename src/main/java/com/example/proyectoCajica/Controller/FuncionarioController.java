@@ -2,6 +2,9 @@ package com.example.proyectoCajica.Controller;
 
 import com.example.proyectoCajica.Model.Funcionario;
 import com.example.proyectoCajica.Service.FuncionarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,38 +13,47 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/funcionario")
+@Tag(name = "Funcionarios", description = "Controlador para gestión de funcionarios")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
 
-    // Guardar un funcionario
     @PostMapping
-    public Funcionario guardar(@RequestBody Funcionario funcionario) {
+    @Operation(summary = "Guardar un funcionario", description = "Permite guardar un funcionario individual.")
+    public Funcionario guardar(
+            @Parameter(description = "Datos del funcionario a guardar", required = true)
+            @RequestBody Funcionario funcionario) {
         return funcionarioService.guardar(funcionario);
     }
 
-    // Listar todos los funcionarios
     @GetMapping
+    @Operation(summary = "Listar funcionarios", description = "Devuelve una lista con todos los funcionarios registrados.")
     public List<Funcionario> listar() {
         return funcionarioService.listar();
     }
 
-    // Buscar funcionario por id
     @GetMapping("/{id}")
-    public Optional<Funcionario> buscarPorId(@PathVariable long id) {
+    @Operation(summary = "Buscar funcionario por ID", description = "Permite buscar un funcionario por su identificador.")
+    public Optional<Funcionario> buscarPorId(
+            @Parameter(description = "ID del funcionario", required = true)
+            @PathVariable long id) {
         return funcionarioService.buscarPorId(id);
     }
 
-    // Eliminar un funcionario por id
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
+    @Operation(summary = "Eliminar funcionario", description = "Permite eliminar un funcionario por su ID.")
+    public void eliminar(
+            @Parameter(description = "ID del funcionario a eliminar", required = true)
+            @PathVariable long id) {
         funcionarioService.eliminar(id);
     }
 
-    // Guardar varios funcionarios
     @PostMapping("/lista")
-    public List<Funcionario> guardarVarios(@RequestBody List<Funcionario> funcionarios) {
+    @Operation(summary = "Guardar varios funcionarios", description = "Permite guardar una lista de funcionarios.")
+    public List<Funcionario> guardarVarios(
+            @Parameter(description = "Lista de funcionarios a guardar", required = true)
+            @RequestBody List<Funcionario> funcionarios) {
         return funcionarioService.guardarTodos(funcionarios);
     }
 }

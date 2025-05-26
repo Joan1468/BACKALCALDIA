@@ -1,7 +1,10 @@
 package com.example.proyectoCajica.Controller;
 
-import com.example.proyectoCajica.Model.hv_equipos;
-import com.example.proyectoCajica.Service.hv_equiposService;
+import com.example.proyectoCajica.Model.HVEquipo;
+import com.example.proyectoCajica.Service.HV_EquipoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,38 +13,47 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/hv_equipos")
+@Tag(name = "HV Equipos", description = "Controlador para gestión de HV Equipos")
 public class hv_equiposController {
 
     @Autowired
-    private hv_equiposService hv_equiposService;
+    private HV_EquipoService hvEquipoService;
 
-    // Guardar un hv_equipos
     @PostMapping
-    public hv_equipos guardar(@RequestBody hv_equipos hvEquipos) {
-        return hv_equiposService.guardar(hvEquipos);
+    @Operation(summary = "Guardar un HV_Equipo", description = "Permite guardar un HV_Equipo individual.")
+    public HVEquipo guardar(
+            @Parameter(description = "Datos del HV_Equipo a guardar", required = true)
+            @RequestBody HVEquipo hvEquipo) {
+        return hvEquipoService.guardar(hvEquipo);
     }
 
-    // Listar todos los hv_equipos
     @GetMapping
-    public List<hv_equipos> listar() {
-        return hv_equiposService.listar();
+    @Operation(summary = "Listar HV Equipos", description = "Devuelve una lista con todos los HV Equipos registrados.")
+    public List<HVEquipo> listar() {
+        return hvEquipoService.listar();
     }
 
-    // Buscar hv_equipos por id
     @GetMapping("/{id}")
-    public Optional<hv_equipos> buscarPorId(@PathVariable long id) {
-        return hv_equiposService.buscarPorId(id);
+    @Operation(summary = "Buscar HV_Equipo por ID", description = "Permite buscar un HV_Equipo por su identificador.")
+    public Optional<HVEquipo> buscarPorId(
+            @Parameter(description = "ID del HV_Equipo", required = true)
+            @PathVariable long id) {
+        return hvEquipoService.buscarPorId(id);
     }
 
-    // Eliminar un hv_equipos por id
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
-        hv_equiposService.eliminar(id);
+    @Operation(summary = "Eliminar HV_Equipo", description = "Permite eliminar un HV_Equipo por su ID.")
+    public void eliminar(
+            @Parameter(description = "ID del HV_Equipo a eliminar", required = true)
+            @PathVariable long id) {
+        hvEquipoService.eliminar(id);
     }
 
-    // Guardar varios hv_equipos
     @PostMapping("/lista")
-    public List<hv_equipos> guardarVarios(@RequestBody List<hv_equipos> hvEquiposList) {
-        return hv_equiposService.guardarTodos(hvEquiposList);
+    @Operation(summary = "Guardar varios HV Equipos", description = "Permite guardar una lista de HV Equipos.")
+    public List<HVEquipo> guardarVarios(
+            @Parameter(description = "Lista de HV Equipos a guardar", required = true)
+            @RequestBody List<HVEquipo> hvEquipoList) {
+        return hvEquipoService.guardarTodos(hvEquipoList);
     }
 }

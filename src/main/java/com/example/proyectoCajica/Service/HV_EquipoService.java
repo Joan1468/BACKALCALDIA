@@ -1,7 +1,7 @@
 package com.example.proyectoCajica.Service;
 
-import com.example.proyectoCajica.Model.hv_equipos;
-import com.example.proyectoCajica.Repository.hv_equiposRepository;
+import com.example.proyectoCajica.Model.HVEquipo;
+import com.example.proyectoCajica.Repository.HV_EquipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class hv_equiposService {
+public class HV_EquipoService {
 
     @Autowired
-    public hv_equiposRepository hv_equiposRepository;
+    private HV_EquipoRepository hvEquipoRepository;
 
-    public hv_equipos guardar(hv_equipos hvEquipos) {
-        return hv_equiposRepository.save(hvEquipos);
+    public HVEquipo guardar(HVEquipo hvEquipo) {
+        return hvEquipoRepository.save(hvEquipo);
     }
 
-    public List<hv_equipos> listar() {
-        return hv_equiposRepository.findAll();
+    public List<HVEquipo> listar() {
+        return hvEquipoRepository.findAll();
     }
 
     public void eliminar(long id) {
-        hv_equiposRepository.deleteById(id);
+        hvEquipoRepository.deleteById(id);
     }
 
-    public Optional<hv_equipos> buscarPorId(long id) {
-        return hv_equiposRepository.findById(id);
+    public Optional<HVEquipo> buscarPorId(long id) {
+        return hvEquipoRepository.findById(id);
     }
 
-    public List<hv_equipos> guardarTodos(List<hv_equipos> hvEquiposList) {
-        return hv_equiposRepository.saveAll(hvEquiposList);
+    public List<HVEquipo> guardarTodos(List<HVEquipo> hvEquiposList) {
+        return hvEquipoRepository.saveAll(hvEquiposList);
     }
 }

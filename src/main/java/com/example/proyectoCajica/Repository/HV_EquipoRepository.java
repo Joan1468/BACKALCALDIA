@@ -1,9 +1,9 @@
 package com.example.proyectoCajica.Repository;
-import com.example.proyectoCajica.Model.hv_equipos;
+
+import com.example.proyectoCajica.Model.HVEquipo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface hv_equiposRepository extends JpaRepository<hv_equipos  , Long>
-{
+public interface HV_EquipoRepository extends JpaRepository<HVEquipo, Long> {
 }

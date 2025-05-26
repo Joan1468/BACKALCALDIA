@@ -1,7 +1,10 @@
 package com.example.proyectoCajica.Controller;
 
-import com.example.proyectoCajica.Model.Inventarios;
-import com.example.proyectoCajica.Service.InventariosService;
+import com.example.proyectoCajica.Model.Inventario;
+import com.example.proyectoCajica.Service.InventarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,39 +12,48 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/inventarios")
-public class InventariosController {
+@RequestMapping("/inventario")
+@Tag(name = "Inventarios", description = "Controlador para gestión de inventarios")
+public class InventarioController {
 
     @Autowired
-    private InventariosService inventariosService;
+    private InventarioService inventarioService;
 
-    // Guardar un inventario
     @PostMapping
-    public Inventarios guardar(@RequestBody Inventarios inventarios) {
-        return inventariosService.guardar(inventarios);
+    @Operation(summary = "Guardar un inventario", description = "Permite guardar un inventario individual.")
+    public Inventario guardar(
+            @Parameter(description = "Datos del inventario a guardar", required = true)
+            @RequestBody Inventario inventario) {
+        return inventarioService.guardar(inventario);
     }
 
-    // Listar todos los inventarios
     @GetMapping
-    public List<Inventarios> listar() {
-        return inventariosService.listar();
+    @Operation(summary = "Listar inventarios", description = "Devuelve una lista con todos los inventarios registrados.")
+    public List<Inventario> listar() {
+        return inventarioService.listar();
     }
 
-    // Buscar inventario por id
     @GetMapping("/{id}")
-    public Optional<Inventarios> buscarPorId(@PathVariable long id) {
-        return inventariosService.buscarPorId(id);
+    @Operation(summary = "Buscar inventario por ID", description = "Permite buscar un inventario por su identificador.")
+    public Optional<Inventario> buscarPorId(
+            @Parameter(description = "ID del inventario", required = true)
+            @PathVariable Long id) {
+        return inventarioService.buscarPorId(id);
     }
 
-    // Eliminar un inventario por id
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable long id) {
-        inventariosService.eliminar(id);
+    @Operation(summary = "Eliminar inventario", description = "Permite eliminar un inventario por su ID.")
+    public void eliminar(
+            @Parameter(description = "ID del inventario a eliminar", required = true)
+            @PathVariable Long id) {
+        inventarioService.eliminar(id);
     }
 
-    // Guardar varios inventarios
     @PostMapping("/lista")
-    public List<Inventarios> guardarVarios(@RequestBody List<Inventarios> inventariosList) {
-        return inventariosService.guardarTodos(inventariosList);
+    @Operation(summary = "Guardar varios inventarios", description = "Permite guardar una lista de inventarios.")
+    public List<Inventario> guardarVarios(
+            @Parameter(description = "Lista de inventarios a guardar", required = true)
+            @RequestBody List<Inventario> inventarios) {
+        return inventarioService.guardarTodos(inventarios);
     }
 }

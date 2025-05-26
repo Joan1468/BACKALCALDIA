@@ -30,6 +30,6 @@ public class Tecnico {
 //TECNICO CON USUARIO
     @OneToOne//UN TECNICO SOLO REPRESENTA UN USUARIO
     @JoinColumn(name = "id_Usuario")// LO QUE VA A BUSCAR
-    private Usuario usuario;//DONDE LO VA A BUSCAR
+    private usuario usuario;//DONDE LO VA A BUSCAR
 
 }

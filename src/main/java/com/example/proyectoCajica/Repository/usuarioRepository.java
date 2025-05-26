@@ -1,9 +1,9 @@
 package com.example.proyectoCajica.Repository;
+
+import com.example.proyectoCajica.Model.usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.proyectoCajica.Model.Usuario;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario  , Long>
-{
+public interface usuarioRepository extends JpaRepository<usuario, Long> {
 }

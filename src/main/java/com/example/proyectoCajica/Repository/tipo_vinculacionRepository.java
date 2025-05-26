@@ -4,6 +4,6 @@ import com.example.proyectoCajica.Model.tipo_vinculacion;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface tipo_vinculacionRepository extends JpaRepository<tipo_vinculacion  , Long>
+public interface tipo_vinculacionRepository extends JpaRepository<tipo_vinculacion, Long>
 {
 }

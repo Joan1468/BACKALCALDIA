@@ -1,7 +1,7 @@
 package com.example.proyectoCajica.Service;
 
-import com.example.proyectoCajica.Model.asignacion;
-import com.example.proyectoCajica.Repository.asignacionRepository;
+import com.example.proyectoCajica.Model.Asignacion;
+import com.example.proyectoCajica.Repository.AsignacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class asignacionService {
+public class AsignacionService {
 
     @Autowired
-    public asignacionRepository asignacionRepository;
+    private AsignacionRepository asignacionRepository;
 
-    public asignacion guardar(asignacion asignacion) {
+    public Asignacion guardar(Asignacion asignacion) {
         return asignacionRepository.save(asignacion);
     }
 
-    public List<asignacion> listar() {
+    public List<Asignacion> listar() {
         return asignacionRepository.findAll();
     }
 
-    public void eliminar(long id) {
+    public void eliminar(int id) {
         asignacionRepository.deleteById(id);
     }
 
-    public Optional<asignacion> buscarPorId(long id) {
+    public Optional<Asignacion> buscarPorId(int id) {
         return asignacionRepository.findById(id);
     }
 
-    public List<asignacion> guardarTodos(List<asignacion> asignaciones) {
+    public List<Asignacion> guardarTodos(List<Asignacion> asignaciones) {
         return asignacionRepository.saveAll(asignaciones);
     }
 }

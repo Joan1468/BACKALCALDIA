@@ -1,6 +1,5 @@
 package com.example.proyectoCajica.Model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,24 +10,20 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Asignacion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idAsignacion; // Usar camelCase es una buena práctica
 
-    //ATRIBUTOS
+    private String prueba; // También usar camelCase para este campo
 
-    private int id_Asignacion;  //IDENTIFIACION DE ASIGNACION
-    private String Prueba;      //aval de que el equipo esta  preparado para usarse
+    // Relaciones
 
-//RELACIONES
+    @OneToOne
+    @JoinColumn(name = "id_equipo") // LO QUE VA A BUSCAR
+    private Equipo equipo;// DONDE LO VA A BUSCAR
 
-    //USUARIO CON EQUIPO
-    @OneToOne//UNA ASIGNACION PARA UN SOLO EQUIPO
-    @JoinColumn(name = "id_Equipo")//LO QUE BUSCARA
-    private Equipo equipo;//DONDE LO VA A BUSCAR
-
-    //ASIGNACION CON USUARIO
-    @ManyToOne//MUCHAS ASIGNACIONES HECHAS POR UN SOLO USUARIO
-    @JoinColumn(name = "id_Usuario")//LO QUE BUSCARA
-    private Usuario usuario;//DONDE LO VA A BUSCAR
-
+    @ManyToOne
+    @JoinColumn(name = "id_usuario") // LO QUE VA A BUSCAR
+    private usuario usuario;// DONDE LO VA A BUSCAR
 }

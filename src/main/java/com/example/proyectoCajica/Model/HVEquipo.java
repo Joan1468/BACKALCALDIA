@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class HV_Equipo {
+public class HVEquipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -34,7 +34,7 @@ public class HV_Equipo {
 // HV_EQUIPO CON USUARIO
     @ManyToOne//MUCHAS HOJAS DE VIDA PUEDEN SER HECHAS POR UN SOLO USUARIO
     @JoinColumn(name = "id_Usuario")// LO QUE VA A BUSCAR
-    private Usuario usuario;//DONDE LO VA A BUSCAR
+    private usuario usuario;//DONDE LO VA A BUSCAR
 
 
 

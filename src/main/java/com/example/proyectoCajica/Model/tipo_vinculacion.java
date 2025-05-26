@@ -3,8 +3,6 @@ package com.example.proyectoCajica.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -18,12 +16,6 @@ public class tipo_vinculacion {
     //ATRIBUTOS
 
     private Long id_tipo_vinculacion;
-    private String funcionario;
-    private String Contratista;
+    private String vinculacion;
 
-//RELACIONES
-
-    //UN TIPO DE VINCULACION PARA MUCHOS USUARIOS
-    @OneToMany(mappedBy = "tipo_vinculacion", cascade = CascadeType.ALL)// LO QUE VA A BUSCAR
-    private List<Usuario> usuario;//DONDE LO VA A BUSCAR
 }
